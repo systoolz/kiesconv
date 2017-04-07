@@ -1,0 +1,4 @@
+1. download and unpack "puff.c" and "puff.h" (look at "/contrib/puff/") files here from
+http://zlib.net/
+
+2. apply "puff.diff" to "puff.c" to avoid of ".data" section generation

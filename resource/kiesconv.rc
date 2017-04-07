@@ -1,0 +1,74 @@
+#undef RC_INVOKED
+#include <commctrl.h>
+#define RC_INVOKED 1
+#include <windows.h>
+#include <richedit.h>
+#include "kiesconv.h"
+
+#ifndef IDC_STATIC
+#define IDC_STATIC (-1)
+#endif
+
+IDI_ICN ICON "kiesconv.ico"
+1 24 "Manifest.xml"
+
+#define R_CAPTION "Samsung Kies phonebook / calendar converter"
+#define R_VERSION "1.0"
+#define R_INTNAME "kiesconv"
+
+1 VERSIONINFO
+FILEVERSION 1,0,0,0
+PRODUCTVERSION 1,0,0,0
+FILETYPE 1
+BEGIN
+  BLOCK "StringFileInfo"
+  BEGIN
+    BLOCK "040904E4"
+    BEGIN
+      VALUE "CompanyName", "SysTools"
+      VALUE "FileDescription", R_CAPTION
+      VALUE "FileVersion", R_VERSION
+      VALUE "LegalCopyright", "\xA9 SysTools 2016-2017"
+      VALUE "OriginalFilename", R_INTNAME ".exe"
+      VALUE "InternalName", R_INTNAME
+      VALUE "ProductName", R_CAPTION
+      VALUE "ProductVersion", R_VERSION
+    END
+  END
+  BLOCK "VarFileInfo"
+  BEGIN
+    VALUE "Translation", 0x409, 1252
+  END
+END
+
+IDD_DLG DIALOG 0, 0, 304, 70
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX
+CAPTION R_CAPTION " v" R_VERSION
+FONT 8, "Ms Shell Dlg"
+BEGIN
+  PUSHBUTTON    "Open", IDC_OPEN, 252, 7, 45, 14
+  PUSHBUTTON    "Save to...", IDC_SAVE, 252, 27, 45, 14
+  DEFPUSHBUTTON "Convert", IDOK, 252, 47, 45, 14
+  PUSHBUTTON    "Exit", IDCANCEL, 202, 47, 45, 14
+  EDITTEXT      IDC_FSRC, 7,  7, 240, 15, ES_AUTOHSCROLL | ES_READONLY
+  EDITTEXT      IDC_FDST, 7, 27, 240, 14, ES_AUTOHSCROLL | ES_READONLY
+  LTEXT         "\xA9 SysTools 2016-2017 | http://systools.losthost.org/?misc", IDC_SITE, 7, 52-5, 190, 8, SS_OWNERDRAW | SS_NOTIFY
+  LTEXT         "Third-party units: aes256b by Ilya Levin; Puff by Mark Adler", IDC_STATIC, 7, 60-4, 190, 8
+END
+
+STRINGTABLE
+BEGIN
+  IDS_MSK_ALL "All supported Kies formats|*.spb;*.ssc|"
+  IDS_MSK_SPB "Kies Samsung Phonebook (*.spb)|*.spb|"
+  IDS_MSK_SSC "Kies Samsung Calendar (*.ssc)|*.ssc|"
+  IDS_MSK_XML "Extensible Markup Language (*.xml)|*.xml|"
+  IDS_MSK_ANY "All Files (*.*)|*.*|"
+
+  IDS_ERR_OCS "Operation completed successfully."
+  IDS_ERR_OPN "Can't open input file for read."
+  IDS_ERR_BAD "Invalid selected file or not in the Samsung Kies Phonebook / Calendar format."
+  IDS_ERR_MEM "Not enough memory to complete operation."
+  IDS_ERR_AES "Decrypting failed, probably invalid or corrupted file."
+  IDS_ERR_GZP "GZ unpacking failed, probably invalid or corrupted file."
+  IDS_ERR_SAV "Can't create output file to write."
+END
