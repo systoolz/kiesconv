@@ -95,9 +95,35 @@ BOOL result;
 DWORD i;
 TCHAR *s, *d, ext[4];
 DRAWITEMSTRUCT *dis;
+// v1.1 drag'n'drop files
+HANDLE dh;
   result = FALSE;
   switch (msg) {
+    // v1.1 drag'n'drop files
+    case WM_DROPFILES:
+      dh = (HANDLE) wparm;
+      // get filename length
+      i = DragQueryFile(dh, 0, NULL, 0);
+      // not empty
+      if (i) {
+        // macros allocated i+1 characters
+        s = STR_ALLOC(i);
+        // memory allocated
+        if (s) {
+          // get filename
+          DragQueryFile(dh, 0, s, i + 1);
+          // set as file to open
+          SetDlgItemText(wnd, IDC_FSRC, s);
+          // post message
+          PostMessage(wnd, WM_COMMAND, MAKELONG(IDC_OPEN, BN_CLICKED), 0);
+          // free buffer
+          FreeMem(s);
+        }
+      }
+      break;
     case WM_INITDIALOG:
+      // v1.1 drag'n'drop files
+      DragAcceptFiles(wnd, TRUE);
       // add icons
       SendMessage(wnd, WM_SETICON, ICON_BIG  , (LPARAM) LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_ICN)));
       SendMessage(wnd, WM_SETICON, ICON_SMALL, (LPARAM) LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_ICN)));
@@ -159,7 +185,7 @@ DRAWITEMSTRUCT *dis;
                 if (!lparm) {
                   PostMessage(wnd, WM_NEXTDLGCTL, (WPARAM) GetDlgItem(wnd, IDOK), TRUE);
                 }
-               } else {
+              } else {
                 // show error message
                 MsgBox(wnd, MAKEINTRESOURCE(IDS_ERR_BAD), MB_ICONERROR);
               }

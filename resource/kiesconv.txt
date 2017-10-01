@@ -1,0 +1,6 @@
+v1.1 [2017.10.01]
+- add drag'n'drop feature to the program window
+- assembler code for setjmp() and longjmp() replaced with builtin functions
+
+v1.0 [2017.04.07]
+- first publice release
