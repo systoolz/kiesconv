@@ -1,3 +1,7 @@
+v1.2 [2018.02.03]
+- add support for old v1.x format back from 2011 (tested on .SPB version 1.15 / multistage)
+- packing type checked in header to detect requirement for gzip uncompression
+
 v1.1 [2017.10.01]
 - add drag'n'drop feature to the program window
 - assembler code for setjmp() and longjmp() replaced with builtin functions
