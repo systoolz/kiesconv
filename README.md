@@ -13,3 +13,5 @@ http://www.softpedia.com/get/Mobile-Phone-Tools/Others/Samsung-Kies-phonebook-ca
 Software homepage (you can download binary "kiesconv.exe" here):
 
 http://systools.losthost.org/?misc#kiesconv
+
+Licensed under the Apache License, Version 2.0 (the "License") - see LICENSE file.
